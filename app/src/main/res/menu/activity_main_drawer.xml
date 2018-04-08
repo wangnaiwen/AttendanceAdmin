@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id = "@+id/nav_record"
+        android:id = "@+id/nav_student"
         android:icon="@drawable/icon_record"
-        android:title="考勤记录"/>
+        android:title="学生管理"/>
     <item
-        android:id = "@+id/nav_attendance"
+        android:id = "@+id/nav_wifi"
+        android:icon="@drawable/icon_record"
+        android:title="地点管理"/>
+    <item
+        android:id = "@+id/nav_leave"
         android:icon="@drawable/icon_attendance"
-        android:title="考勤计划"/>
+        android:title="请假管理"/>
     <item
         android:id = "@+id/nav_setting"
         android:icon="@drawable/icon_settings"

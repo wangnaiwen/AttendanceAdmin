@@ -1,12 +1,14 @@
 package com.wnw.attendanceadmin.bean;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by wnw on 2018/3/13.
  */
 
-public class Wifi extends BmobObject {
+public class Wifi extends BmobObject implements Serializable{
     private String address;
     private String mac;
 

@@ -1,10 +1,13 @@
 package com.wnw.attendanceadmin.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wnw.attendanceadmin.R;
@@ -36,10 +39,18 @@ public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.VHolder>{
     }
 
     @Override
-    public void onBindViewHolder(WifiAdapter.VHolder holder, int position) {
+    public void onBindViewHolder(WifiAdapter.VHolder holder, final int position) {
         Wifi wifi = wifiList.get(position);
         holder.timeTv.setText("考勤Wifi：" + wifi.getMac());
         holder.addressTv.setText("考勤地点：" + wifi.getAddress());
+        holder.itemRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((Activity)context).startActivityForResult(new Intent(context, UpdateWifiActivity.class).putExtra(
+                "wifi", wifiList.get(position)), 1001);
+                ((Activity)context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
     }
 
     @Override
@@ -48,6 +59,7 @@ public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.VHolder>{
     }
 
     class VHolder extends RecyclerView.ViewHolder{
+        RelativeLayout itemRl;
         TextView timeTv;
         TextView addressTv;
 
@@ -55,6 +67,7 @@ public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.VHolder>{
             super(itemView);
             timeTv = (TextView)itemView.findViewById(R.id.mac);
             addressTv = (TextView)itemView.findViewById(R.id.address);
+            itemRl = (RelativeLayout)itemView.findViewById(R.id.rl_item_wifi);
         }
     }
 }

@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initView();
     }
 
@@ -112,11 +111,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        }else if (id == R.id.nav_record){
-            Intent intent = new Intent(MainActivity.this, RecordActivity.class);
+        }else if (id == R.id.nav_leave){
+            Intent intent = new Intent(MainActivity.this, LeaveActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        }else if (id == R.id.nav_attendance){
+        }else if (id == R.id.nav_student){
+            Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }else if (id == R.id.nav_wifi){
+            Intent intent = new Intent(MainActivity.this, WifiActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
         return true;
     }

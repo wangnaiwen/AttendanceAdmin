@@ -55,6 +55,10 @@
         <activity android:name=".view.RecordActivity"/>
         <activity android:name=".view.StudentActivity"/>
         <activity android:name=".view.SettingActivity"/>
+        <activity android:name=".view.AddWifiActivity"/>
+        <activity android:name=".view.UpdateWifiActivity"/>
+        <activity android:name=".view.AddStudentActivity"/>
+        <activity android:name=".view.UpdateStudentActivity"/>
     </application>
 
 </manifest>
