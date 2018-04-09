@@ -59,6 +59,8 @@
         <activity android:name=".view.UpdateWifiActivity"/>
         <activity android:name=".view.AddStudentActivity"/>
         <activity android:name=".view.UpdateStudentActivity"/>
+        <activity android:name=".view.UpdateLeaveActivity"/>
+        <activity android:name=".view.AddAttendanceActivity"/>
     </application>
 
 </manifest>
