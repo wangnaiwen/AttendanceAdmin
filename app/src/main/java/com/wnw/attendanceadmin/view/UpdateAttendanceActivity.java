@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,14 +21,15 @@ import java.util.Date;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.TimePicker;
 
 /**
- * Created by wnw on 2018/4/9.
+ * Created by wnw on 2018/4/11.
  */
 
-public class AddAttendanceActivity extends AppCompatActivity{
+public class UpdateAttendanceActivity extends AppCompatActivity{
     private EditText startTime;
     private EditText endTime;
     private EditText address;
@@ -48,21 +48,26 @@ public class AddAttendanceActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_attendance);
+        setContentView(R.layout.activity_update_attendance);
+        Intent intent = getIntent();
+        attendance = (Attendance) intent.getSerializableExtra("attendance");
         initView();
     }
 
     private void initView(){
-        attendance = new Attendance();
-
         startTime = (EditText)findViewById(R.id.start_time);
         endTime = (EditText)findViewById(R.id.end_time);
         address = (EditText)findViewById(R.id.address);
         finishTv = (TextView)findViewById(R.id.tv_finish_insert);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        startTime.setText(df.format(new Date(attendance.getStartTime())));
+        endTime.setText(df.format(new Date(attendance.getEndTime())));
+        address.setText(attendance.getAddress());
+
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePicker datePicker = new DatePicker(AddAttendanceActivity.this);
+                DatePicker datePicker = new DatePicker(UpdateAttendanceActivity.this);
                 datePicker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
                     @Override
                     public void onDatePicked(String year, String month, String day) {
@@ -73,7 +78,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
                             startYear = year;
                             startMonth = month;
                             startDay = day;
-                            TimePicker timePicker = new TimePicker(AddAttendanceActivity.this);
+                            TimePicker timePicker = new TimePicker(UpdateAttendanceActivity.this);
                             timePicker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
                                 @Override
                                 public void onTimePicked(String hour, String minute) {
@@ -100,7 +105,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(startYear)){
-                    Toast.makeText(AddAttendanceActivity.this, "请先选择开始时间", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateAttendanceActivity.this, "请先选择开始时间", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 endYear = startYear;
@@ -109,7 +114,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
                 attendance.setEndYear(Integer.parseInt(endYear));
                 attendance.setEadMonth(Integer.parseInt(endMonth));
                 attendance.setEndDay(Integer.parseInt(endDay));
-                TimePicker timePicker = new TimePicker(AddAttendanceActivity.this);
+                TimePicker timePicker = new TimePicker(UpdateAttendanceActivity.this);
                 timePicker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
                     @Override
                     public void onTimePicked(String hour, String minute) {
@@ -129,13 +134,13 @@ public class AddAttendanceActivity extends AppCompatActivity{
         finishTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertAttendance();
+                updateAttendance();
             }
         });
         address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddAttendanceActivity.this, WifiActivity.class).putExtra("addAttendance", true);
+                Intent intent = new Intent(UpdateAttendanceActivity.this, WifiActivity.class).putExtra("addAttendance", true);
                 startActivityForResult(intent, 1001);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -148,7 +153,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return df.parse(strDate);
     }
-    private void insertAttendance(){
+    private void updateAttendance(){
         if(startTime.getText().toString().trim().isEmpty()){
             Toast.makeText(this, "开始时间不能为空",Toast.LENGTH_SHORT).show();
         }else if (endTime.getText().toString().trim().isEmpty()){
@@ -156,16 +161,16 @@ public class AddAttendanceActivity extends AppCompatActivity{
         }else if (address.getText().toString().trim().isEmpty()){
             Toast.makeText(this, "考勤地址不能为空",Toast.LENGTH_SHORT).show();
         }else{
-            attendance.save(new SaveListener<String>() {
+            attendance.update(attendance.getObjectId(), new UpdateListener() {
                 @Override
-                public void done(String s, BmobException e) {
+                public void done(BmobException e) {
                     if(e == null){
-                        Toast.makeText(AddAttendanceActivity.this, "添加成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateAttendanceActivity.this, "更新成功", Toast.LENGTH_SHORT).show();
                         setResult(RESULT_OK);
                         finish();
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     }else {
-                        e.printStackTrace();
+                        Toast.makeText(UpdateAttendanceActivity.this, "更新失败，请重试", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

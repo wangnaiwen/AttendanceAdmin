@@ -33,7 +33,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -61,6 +61,7 @@
         <activity android:name=".view.UpdateStudentActivity"/>
         <activity android:name=".view.UpdateLeaveActivity"/>
         <activity android:name=".view.AddAttendanceActivity"/>
+        <activity android:name=".view.UpdateAttendanceActivity"/>
     </application>
 
 </manifest>

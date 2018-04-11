@@ -39,10 +39,14 @@ public class WifiActivity extends AppCompatActivity{
 
     private ProgressDialog progressDialog;
 
+    public boolean isAddAttendance;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi);
+        Intent intent = getIntent();
+        isAddAttendance = intent.getBooleanExtra("addAttendance",false);
         initView();
     }
 
@@ -106,6 +110,7 @@ public class WifiActivity extends AppCompatActivity{
         Log.e("attendanceTAG", "update rv");
         wifiAdapter.setWifiList(wifiList);
         wifiAdapter.notifyDataSetChanged();
+        wifiAdapter.isAttendance(isAddAttendance);
     }
 
     @Override

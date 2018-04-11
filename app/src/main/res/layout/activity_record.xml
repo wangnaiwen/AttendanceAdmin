@@ -3,5 +3,16 @@
     android:orientation="vertical" 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:id="@+id/tv_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="暂时无人打卡"/>
 </LinearLayout>

@@ -63,7 +63,7 @@
         android:layout_height="48dp"
         android:background="@color/colorAccent"
         android:textColor="#FFFFFFFF"
-        android:text="添加"
+        android:text="确认更新"
         android:gravity="center"
         android:textSize="18sp"
         android:layout_margin="10dp"/>

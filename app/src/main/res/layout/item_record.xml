@@ -26,7 +26,7 @@
             android:layout_marginTop="4dp"
             android:src="@drawable/point_time" />
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/sid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
@@ -38,35 +38,32 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/time"
+            android:layout_below="@+id/sid"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="4dp"
             android:src="@drawable/point_address" />
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/time"
+            android:layout_below="@+id/sid"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="6dp"
             android:textColor="@color/wallet_text_gray"
             android:textSize="@dimen/meduim_text" />
-
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/address"
+            android:layout_below="@+id/status"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="4dp"
-            android:src="@drawable/point_result" />
-
+            android:src="@drawable/point_address" />
         <TextView
-            android:id="@+id/result"
-            android:layout_width="match_parent"
-            android:layout_marginRight="12dp"
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/address"
+            android:layout_below="@+id/status"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="6dp"
             android:textColor="@color/wallet_text_gray"

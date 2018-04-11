@@ -43,9 +43,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
         Record record = recordList.get(position);
         Date date = new Date(record.getRecordTime());
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        holder.timeTv.setText("考勤时间：" + sdf.format(date));
-        holder.resultTv.setText("考勤结果：" + record.getResult());
-        holder.addressTv.setText("考勤地点：" + record.getAddress());
+        holder.sidTv.setText("学号：" + record.getsId());
+        holder.statusTv.setText("状态：" + record.getResult());
+        holder.timeTv.setText("时间：" + sdf.format(date));
     }
 
     @Override
@@ -54,15 +54,15 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
     }
 
     class RecordHolder extends RecyclerView.ViewHolder{
+        TextView sidTv;
         TextView timeTv;
-        TextView addressTv;
-        TextView resultTv;
+        TextView statusTv;
 
         public RecordHolder(View itemView) {
             super(itemView);
+            sidTv = (TextView)itemView.findViewById(R.id.sid);
+            statusTv = (TextView)itemView.findViewById(R.id.status);
             timeTv = (TextView)itemView.findViewById(R.id.time);
-            resultTv = (TextView)itemView.findViewById(R.id.result);
-            addressTv = (TextView)itemView.findViewById(R.id.address);
         }
     }
 }

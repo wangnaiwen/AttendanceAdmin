@@ -22,10 +22,14 @@ import java.util.List;
 public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.VHolder>{
     private Context context;
     private List<Wifi> wifiList;
-
+    private boolean isAttendance;
     public WifiAdapter(Context context, List<Wifi> wifis) {
         this.context = context;
         this.wifiList = wifis;
+    }
+
+    public void isAttendance(boolean isAttendance){
+        this.isAttendance = isAttendance;
     }
 
     public void setWifiList(List<Wifi> wifis) {
@@ -40,15 +44,25 @@ public class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.VHolder>{
 
     @Override
     public void onBindViewHolder(WifiAdapter.VHolder holder, final int position) {
-        Wifi wifi = wifiList.get(position);
+        final Wifi wifi = wifiList.get(position);
         holder.timeTv.setText("考勤Wifi：" + wifi.getMac());
         holder.addressTv.setText("考勤地点：" + wifi.getAddress());
+
         holder.itemRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((Activity)context).startActivityForResult(new Intent(context, UpdateWifiActivity.class).putExtra(
-                "wifi", wifiList.get(position)), 1001);
-                ((Activity)context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if (isAttendance) {
+                    Intent intent = new Intent();
+                    intent.putExtra("wifi", wifi);
+                    ((Activity) context).setResult(Activity.RESULT_OK, intent);
+                    ((Activity) context).finish();
+                    ((Activity) context).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                } else {
+                    ((Activity) context).startActivityForResult(new Intent(context, UpdateWifiActivity.class).putExtra(
+                            "wifi", wifiList.get(position)), 1001);
+                    ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                }
             }
         });
     }

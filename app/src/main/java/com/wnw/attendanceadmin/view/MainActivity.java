@@ -130,8 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }else{
                     progressDialog.dismiss();
                     e.printStackTrace();
-                    mRecyclerView.setVisibility(View.GONE);
-                    nothingTv.setVisibility(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.GONE);                    nothingTv.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -140,7 +139,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1001 && resultCode == RESULT_OK){
-            updateRv();
+
+            Date date = new Date();
+            long l = 24*60*60*1000; //每天的毫秒数
+            //date.getTime()是现在的毫秒数，它 减去 当天零点到现在的毫秒数（ 现在的毫秒数%一天总的毫秒数，取余。），理论上等于零点的毫秒数，不过这个毫秒数是UTC+0时区的。
+            //减8个小时的毫秒值是为了解决时区的问题。
+
+            final long startTime = (date.getTime() - (date.getTime()%l) - 8* 60 * 60 *1000);
+            final long endTime = startTime + 24 * 60 * 60 * 1000;
+
+            findAttendance(startTime, endTime);
         }
     }
 
