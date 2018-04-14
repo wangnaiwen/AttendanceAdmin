@@ -145,6 +145,13 @@ public class UpdateAttendanceActivity extends AppCompatActivity{
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+
+        findViewById(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delete();
+            }
+        });
     }
 
     //把字符串转为日期
@@ -193,5 +200,21 @@ public class UpdateAttendanceActivity extends AppCompatActivity{
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    private void delete(){
+        attendance.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e == null){
+                    Toast.makeText(UpdateAttendanceActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
+                    finish();
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                }else {
+                    Toast.makeText(UpdateAttendanceActivity.this, "删除成功，请重试", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

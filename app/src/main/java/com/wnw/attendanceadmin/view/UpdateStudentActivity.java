@@ -51,6 +51,29 @@ public class UpdateStudentActivity extends AppCompatActivity{
                 updateStudent();
             }
         });
+
+        findViewById(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delete();
+            }
+        });
+    }
+
+    private void delete(){
+        user.delete(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e == null){
+                    Toast.makeText(UpdateStudentActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
+                    finish();
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                }else {
+                    Toast.makeText(UpdateStudentActivity.this, "删除成功，请重试", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void updateStudent(){

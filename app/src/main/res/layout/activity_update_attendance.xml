@@ -67,4 +67,15 @@
         android:gravity="center"
         android:textSize="18sp"
         android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorAccent"
+        android:textColor="#FFFFFFFF"
+        android:text="删除"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_margin="10dp"/>
 </LinearLayout>
