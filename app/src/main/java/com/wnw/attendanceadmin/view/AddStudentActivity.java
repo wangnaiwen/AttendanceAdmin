@@ -1,6 +1,6 @@
 package com.wnw.attendanceadmin.view;
 
-import android.os.Bundle;
+import  android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import com.wnw.attendanceadmin.R;
 import com.wnw.attendanceadmin.bean.User;
-import com.wnw.attendanceadmin.bean.Wifi;
 
-import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.exception.BmobException;import com.wnw.attendanceadmin.bean.Wifi;
+
 import cn.bmob.v3.listener.SaveListener;
 
 /**

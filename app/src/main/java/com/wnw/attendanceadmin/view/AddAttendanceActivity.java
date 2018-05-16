@@ -30,6 +30,7 @@ import cn.qqtheme.framework.picker.TimePicker;
  */
 
 public class AddAttendanceActivity extends AppCompatActivity{
+    //开始时间，结束时间，地点，插入按钮等
     private EditText startTime;
     private EditText endTime;
     private EditText address;
@@ -52,6 +53,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
         initView();
     }
 
+    //初始化界面
     private void initView(){
         attendance = new Attendance();
 
@@ -59,6 +61,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
         endTime = (EditText)findViewById(R.id.end_time);
         address = (EditText)findViewById(R.id.address);
         finishTv = (TextView)findViewById(R.id.tv_finish_insert);
+        //点击开始选择日期
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +76,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
                             startYear = year;
                             startMonth = month;
                             startDay = day;
+                            //选好日期后，选择时间
                             TimePicker timePicker = new TimePicker(AddAttendanceActivity.this);
                             timePicker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
                                 @Override
@@ -96,6 +100,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
             }
         });
 
+        //选择结束时间，但是选择之前必须先选择开始时间
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +130,7 @@ public class AddAttendanceActivity extends AppCompatActivity{
                 timePicker.show();
             }
         });
-
+        //完成，然后插入数据
         finishTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,6 +153,8 @@ public class AddAttendanceActivity extends AppCompatActivity{
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return df.parse(strDate);
     }
+
+    //插入打卡计划
     private void insertAttendance(){
         if(startTime.getText().toString().trim().isEmpty()){
             Toast.makeText(this, "开始时间不能为空",Toast.LENGTH_SHORT).show();
@@ -184,6 +191,9 @@ public class AddAttendanceActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * 用户按下返回键
+     * */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
